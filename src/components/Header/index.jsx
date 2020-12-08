@@ -1,35 +1,50 @@
-import React, {useEffect} from "react";
-import io from "socket.io"
+import React, { useEffect, useState } from "react";
+// import socketIOClient from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux";
+import { getTps } from "../../actions";
 
 function Header() {
-    useEffect(() => {
-        const socket = io("http://35.225.229.8:3000/");
-        console.log(socket)
-    }, [])
+  const dispatch = useDispatch();
+  const tps = useSelector((data) => data.tabulasi.tps);
+  const [initTps] = useState(814);
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    dispatch(getTps());
+    const intervalId = setInterval(() => {
+      dispatch(getTps());
+    }, 20000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   return (
-    <div className="container" style={{paddingTop:20, paddingBottom:40}}>
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div  class="notification is-danger">
-            <p class="heading is-size-5">TPS</p>
-            <p class="title">814</p>
+    <div className="container" style={{ paddingTop: 20, paddingBottom: 40 }}>
+      <nav className="level">
+        <div className="level-item has-text-centered">
+          <div className="notification is-danger">
+            <p className="heading is-size-5">TPS</p>
+            <p className="title">{initTps-tps}</p>
           </div>
         </div>
-        <div class="level-item has-text-centered">
+        <div className="level-item has-text-centered">
           <div>
-            <p class="is-size-4" style={{borderBottom:'1px solid #000'}}>TABULASI SUARA</p>
-            <p class="is-size-2">NELSON - HENDRA</p>
+            <p className="is-size-4" style={{ borderBottom: "1px solid #000" }}>
+              TABULASI SUARA
+            </p>
+            <p className="is-size-2">NELSON - HENDRA</p>
           </div>
         </div>
-        
-        <div class="level-item has-text-centered">
-          <div  class="notification is-success">
-            <p class="heading is-size-5">TPS</p>
-            <p class="title">0</p>
+
+        <div className="level-item has-text-centered">
+          <div className="notification is-success">
+            <p className="heading is-size-5">TPS</p>
+            <p className="title">{tps}</p>
           </div>
         </div>
       </nav>
-      <progress class="progress is-danger" value="90" max="100">90%</progress>
+      <progress className="progress is-danger" value={tps} max={initTps}>
+        90%
+      </progress>
     </div>
   );
 }

@@ -1,46 +1,33 @@
-import {} from "../actions";
+import { GET_TPS, GET_SUARA, GET_TOTAL_SUARA } from "../actions";
 
 const initialState = {
   tps: 0,
-  suara: [
-    {
-      nama_paslon: "Tonny - Darityatno",
-      no_urut: 1,
-      gambar: "tabulasi_no_1.png",
-      warna: "red",
-      suara: "468",
-    },
-    {
-      nama_paslon: "Nelson - Hendra",
-      no_urut: 2,
-      gambar: "tabulasi_no_2.png",
-      warna: "green",
-      suara: "5530",
-    },
-    {
-      nama_paslon: "Hamdi - Tommy",
-      no_urut: 3,
-      gambar: "tabulasi_no_3.png",
-      warna: "orange",
-      suara: "542",
-    },
-    {
-      nama_paslon: "Rustam - Diky",
-      no_urut: 4,
-      gambar: "tabulasi_no_4.png",
-      warna: "navy",
-      suara: "602",
-    },
-  ],
+  suara: null,
+  total: null,
 };
 
 const Tabulasi = (state = initialState, action) => {
   switch (action.type) {
-    // case CHECK_LOAD: {
-    //   return {
-    //     ...state,
-    //   };
-    // }
+    case GET_TPS: {
+      return {
+        ...state,
+        tps: action.data,
+      };
+    }
+
+    case GET_SUARA: {
+      return {
+        ...state,
+        suara: action.data,
+      };
+    }
+
+    case GET_TOTAL_SUARA: {
+      return {
+        ...state,
+        total: action.data,
+      };
+    }
 
     default:
       return state;
