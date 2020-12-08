@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
-import socketIOClient from "socket.io-client";
+import io from "socket.io"
 
 function Header() {
-    // useEffect(() => {
-    //     const socket = socketIOClient("http://35.225.229.8:3000/");
-    //     console.log(socket)
-    // }, [])
+    useEffect(() => {
+        const socket = io("http://35.225.229.8:3000/");
+        console.log(socket)
+    }, [])
   return (
     <div className="container" style={{paddingTop:20, paddingBottom:40}}>
       <nav class="level">
