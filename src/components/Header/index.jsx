@@ -3,9 +3,7 @@ import socketIOClient from "socket.io-client";
 
 function Header() {
     useEffect(() => {
-        const socket = socketIOClient("http://35.225.229.8:3000/", {
-            withCredentials: true,
-        });
+        const socket = socketIOClient("http://35.225.229.8:3000/");
         console.log(socket)
     }, [])
   return (
